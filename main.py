@@ -28,15 +28,15 @@ def get_number_years_winery():
 
     number_of_years = age % 100
     if number_of_years >= 10 and number_of_years <= 20:
-        return f'{age} лет'
+        return f"{age} лет"
     else:
         number_of_years = age % 10
         if number_of_years == 1:
-            return f'{age} год'
+            return f"{age} год"
         elif number_of_years >= 2 and number_of_years <= 4:
-            return f'{age} года'
+            return f"{age} года"
         else:
-            return f'{age} лет'
+            return f"{age} лет"
 
 
 def fill_file(
