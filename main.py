@@ -24,9 +24,19 @@ def get_number_years_winery():
         day=1,
         hour=0,
     )
-    years = round(delta.days / 365.2425)
+    age = round(delta.days / 365.2425)
 
-    return years
+    number_of_years = age % 100
+    if number_of_years >= 10 and number_of_years <= 20:
+        return f'{age} лет'
+    else:
+        number_of_years = age % 10
+        if number_of_years == 1:
+            return f'{age} год'
+        elif number_of_years >= 2 and number_of_years <= 4:
+            return f'{age} года'
+        else:
+            return f'{age} лет'
 
 
 def fill_file(
@@ -56,10 +66,10 @@ def main():
     file_name = args.file
     drinks = text_file_parser.fetch_drinks(file_name)
     template = get_file()
-    years = get_number_years_winery()
+    string_age = get_number_years_winery()
     fill_file(
         template,
-        years,
+        string_age,
         drinks,
     )
 
