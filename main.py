@@ -18,13 +18,6 @@ def get_file():
 
 
 def get_number_years_winery():
-    delta = datetime.datetime.now() - datetime.datetime(
-        year=1921,
-        month=1,
-        day=1,
-        hour=0,
-    )
-    age = round(delta.days / 365.2425)
     age = round((datetime.datetime.now() - datetime.datetime(year=1921, month=1, day=1, hour=0)).days / 365.2425)
 
     number_of_years = age % 100
