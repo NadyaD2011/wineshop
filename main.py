@@ -35,12 +35,12 @@ def get_number_years_winery():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Введите здесь путь к текстовому файлу",
+        description="Здесь вводится путь к текстовому файлу",
     )
     parser.add_argument(
         "-f",
         "--file",
-        help="Введите здесь путь к текстовому файлу",
+        help="Здесь вводится путь к текстовому файлу",
     )
     args = parser.parse_args()
     file_name = args.file
