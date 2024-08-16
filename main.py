@@ -33,20 +33,6 @@ def get_number_years_winery():
             return f"{age} лет"
 
 
-def fill_file(
-    template,
-    years,
-    drinks,
-):
-    rendered_page = template.render(
-        years=years,
-        drinks=drinks,
-    )
-
-    with open("index.html", "w", encoding="utf8") as file:
-        file.write(rendered_page)
-
-
 def main():
     parser = argparse.ArgumentParser(
         description="Введите здесь путь к текстовому файлу",
@@ -61,11 +47,13 @@ def main():
     drinks = text_file_parser.fetch_drinks(file_name)
     template = get_file()
     string_age = get_number_years_winery()
-    fill_file(
-        template,
-        string_age,
-        drinks,
+    rendered_page = template.render(
+        years=string_age,
+        drinks=drinks,
     )
+
+    with open("index.html", "w", encoding="utf8") as file:
+        file.write(rendered_page)
 
 
 if __name__ == "__main__":
