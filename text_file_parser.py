@@ -49,7 +49,6 @@ def read_text_file(file_name):
 
 
 def parse_text(text):
-
     drinks = []
     split_text = text.split("\n\n\n# ")
     for drinks_by_type in split_text:
