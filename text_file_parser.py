@@ -1,74 +1,56 @@
-import re
+import pandas
+import json
+from pprint import pprint
+import collections
 
 
-def parse_item(item):
-    try:
-        first_index = re.search("[:] ", item).end()
-        return item[first_index:]
-    except AttributeError:
-        return None
-
-
-def separate_type_and_units(item):
-    drink_type_last_index = re.search("\n\n", item).end() - 2
-    if item.startswith("#"):
-        first_index = 2
-        drink_type = item[first_index:drink_type_last_index]
-    else:
-        drink_type = item[:drink_type_last_index]
-    units_first_index = drink_type_last_index + 3
-    return drink_type, item[units_first_index:]
-
-
-def parse_drinks(items):
-    specifications = items.split("\n")
-    is_profitable = "Выгодное предложение" in specifications
-    for specification in specifications:
-        if specification.startswith("Название:"):
-            name = parse_item(specification)
-        elif specification.startswith("Сорт:"):
-            variety = parse_item(specification)
-        elif specification.startswith("Цена:"):
-            price = parse_item(specification)
-        elif specification.startswith("Картинка:"):
-            picture = parse_item(specification)
-    drink_specs = {
-        "name": name,
-        "variety": variety,
-        "price": price,
-        "picture": picture,
+def parse_drinks(drink):
+    is_profitable = "Выгодное предложение"
+    drink_info = {
+        "name": drink["Название"],
+        "variety": drink["Сорт"],
+        "price": drink["Цена"],
+        "picture": drink["Картинка"],
         "is_profitable": is_profitable,
     }
-    return drink_specs
+    return drink_info
 
 
-def read_text_file(file_name):
-    with open(file_name, "r", encoding="UTF-8") as file:
-        text = file.read()
-    return text
+def read_wine_table(table_name):
+    excel_data_df = pandas.read_excel(
+        table_name, sheet_name="Лист1", keep_default_na=False
+    )
+    excel_data_df = excel_data_df.to_json(orient="records", force_ascii=False)
+    excel_data_df = list(json.loads(excel_data_df))
+    catalog_drinks = collections.defaultdict(list)
+    catalog_drinks["Красные вина"]
+    catalog_drinks["Белые вина"]
+    catalog_drinks["Напитки"]
 
-
-def parse_text(text):
-    drinks = []
-    split_text = text.split("\n\n\n# ")
-    for drinks_by_type in split_text:
-        drinks_type_name, drinks_by_type_units = separate_type_and_units(
-            drinks_by_type,
+    for index_wine in range(len(excel_data_df)):
+        catalog_drinks[excel_data_df[index_wine]["Категория"]].append(
+            excel_data_df[index_wine]
         )
-        split_drinks_by_type_units = drinks_by_type_units.split("\n\n")
-        drink_units = [
-            parse_drinks(drink_unit) for drink_unit in split_drinks_by_type_units
-        ]
+
+    return catalog_drinks
+
+
+def parse_text(catalog_drinks):
+    drinks = []
+    drink_units = []
+    for drinks_by_type in catalog_drinks:
+        for drink in catalog_drinks[drinks_by_type]:
+            drink_units.append(parse_drinks(drink))
 
         one_type_drinks = {
-            "type": drinks_type_name,
+            "type": drinks_by_type,
             "units": drink_units,
         }
         drinks.append(one_type_drinks)
     return drinks
 
 
-def fetch_drinks(file_name):
-    text = read_text_file(file_name)
-    drinks = parse_text(text)
+def fetch_drinks(table_name):
+    excel_data_df = read_wine_table(table_name)
+    drinks = parse_text(excel_data_df)
     return drinks
