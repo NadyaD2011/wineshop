@@ -4,7 +4,7 @@ import text_file_parser
 import argparse
 
 
-def get_file():
+def get_template_file():
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(
