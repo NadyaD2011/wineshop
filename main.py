@@ -19,7 +19,7 @@ def get_template_file():
 
 
 def get_number_years_winery():
-    age = round(datetime.datetime.now() - 1921)
+    age = round(datetime.datetime.now().year - 1921)
 
     number_of_years = age % 100
     if number_of_years >= 10 and number_of_years <= 20:
@@ -46,10 +46,9 @@ def main():
     args = parser.parse_args()
     file_name = args.file
     drinks = text_file_parser.fetch_drinks(file_name)
-    template = get_file()
-    string_age = get_number_years_winery()
+    template = get_template_file()
     rendered_page = template.render(
-        years=string_age,
+        years=get_number_years_winery(),
         drinks=drinks,
     )
 
