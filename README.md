@@ -18,7 +18,7 @@
 - Запустите сайт командой, где path это путь до файла с напитками
 
 ```sh
-    python3 main.py -f path
+    python main.py -f path
 ```
 
 - Откройте в браузере полученый index.html
