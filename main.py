@@ -18,7 +18,7 @@ def get_file():
 
 
 def get_number_years_winery():
-    age = round((datetime.datetime.now() - datetime.datetime(year=1921, month=1, day=1, hour=0)).days / 365.2425)
+    age = round(datetime.datetime.now() - 1921)
 
     number_of_years = age % 100
     if number_of_years >= 10 and number_of_years <= 20:
