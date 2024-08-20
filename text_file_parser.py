@@ -1,6 +1,5 @@
 import pandas
 import json
-from pprint import pprint
 import collections
 
 
@@ -10,9 +9,13 @@ def parse_drinks(drink):
         "name": drink["Название"],
         "variety": drink["Сорт"],
         "price": drink["Цена"],
-        "picture": drink["Картинка"],
-        "is_profitable": is_profitable,
+        "picture": f'images\{drink["Картинка"]}',
+        "is_profitable": "",
     }
+    
+    if drink["Акция"]:
+        drink_info["is_profitable"] = is_profitable
+
     return drink_info
 
 
@@ -37,20 +40,24 @@ def read_wine_table(table_name):
 
 def parse_text(catalog_drinks):
     drinks = []
-    drink_units = []
     for drinks_by_type in catalog_drinks:
+        drink_units = []
         for drink in catalog_drinks[drinks_by_type]:
-            drink_units.append(parse_drinks(drink))
+            if drink["Категория"] == drinks_by_type:
+                drink_units.append(parse_drinks(drink))
 
         one_type_drinks = {
             "type": drinks_by_type,
             "units": drink_units,
         }
+
         drinks.append(one_type_drinks)
+
     return drinks
 
 
 def fetch_drinks(table_name):
     excel_data_df = read_wine_table(table_name)
     drinks = parse_text(excel_data_df)
+
     return drinks
