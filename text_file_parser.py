@@ -2,22 +2,6 @@ import pandas
 import collections
 
 
-def parse_drinks(drink):
-    is_profitable = "Выгодное предложение"
-    drink_info = {
-        "name": drink["Название"],
-        "variety": drink["Сорт"],
-        "price": drink["Цена"],
-        "picture": f'images\{drink["Картинка"]}',
-        "is_profitable": "",
-    }
-    
-    if drink["Акция"]:
-        drink_info["is_profitable"] = is_profitable
-
-    return drink_info
-
-
 def read_wine_table(table_name):
     excel_data_df = pandas.read_excel(
         table_name, sheet_name="Лист1", keep_default_na=False
