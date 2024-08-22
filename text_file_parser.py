@@ -3,20 +3,13 @@ import collections
 
 
 def read_wine_table(table_name):
-    excel_data_df = pandas.read_excel(
-        table_name, sheet_name="Лист1", keep_default_na=False
-    )
-    excel_data_df = excel_data_df.to_json(orient="records", force_ascii=False)
-    excel_data_df = list(json.loads(excel_data_df))
-    catalog_drinks = collections.defaultdict(list)
-    catalog_drinks["Красные вина"]
-    catalog_drinks["Белые вина"]
-    catalog_drinks["Напитки"]
+    products = pandas.read_excel(
+        table_name, na_values=None, keep_default_na=False
+    ).to_dict(orient="records")
+    grouped_products = collections.defaultdict(list)
 
-    for index_wine in range(len(excel_data_df)):
-        catalog_drinks[excel_data_df[index_wine]["Категория"]].append(
-            excel_data_df[index_wine]
-        )
+    for product in products:
+        grouped_products[product["Категория"]].append(product)
 
     return catalog_drinks
 
