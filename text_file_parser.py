@@ -44,10 +44,3 @@ def fetch_drinks(table_name):
         drinks.append(one_type_drinks)
 
     return drinks
-
-
-def fetch_drinks(table_name):
-    excel_data_df = read_wine_table(table_name)
-    drinks = parse_text(excel_data_df)
-
-    return drinks
