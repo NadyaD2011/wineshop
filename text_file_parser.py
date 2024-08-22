@@ -11,7 +11,7 @@ def read_wine_table(table_name):
     for product in products:
         grouped_products[product["Категория"]].append(product)
 
-    return catalog_drinks
+    return grouped_products
 
 
 def parse_text(catalog_drinks):
