@@ -36,7 +36,7 @@ def get_number_years_winery():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Получаит путь к файлу таблицы",
+        description="Получает путь к файлу таблицы",
     )
     parser.add_argument(
         "-f",

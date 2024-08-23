@@ -7,7 +7,7 @@ def read_wine_table(table_name):
         orient="records"
     )
     grouped_products = collections.defaultdict(list)
-    
+
     for product in products:
         grouped_products[product["Категория"]].append(product)
 
