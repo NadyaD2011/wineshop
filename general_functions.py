@@ -1,13 +1,13 @@
-import pandas
+from pandas import pd
 import collections
 
 
 def read_wine_table(table_name):
-    products = pandas.read_excel(
-        table_name, na_values=None, keep_default_na=False
-    ).to_dict(orient="records")
+    products = pd.read_excel(table_name, na_values=None, keep_default_na=False).to_dict(
+        orient="records"
+    )
     grouped_products = collections.defaultdict(list)
-
+    
     for product in products:
         grouped_products[product["Категория"]].append(product)
 
