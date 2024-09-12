@@ -105,29 +105,29 @@
     
     <div><a id="products"></a></div>
     <div class="site-section">
-      {% for drink in drinks %}
+      {% for category, drink in drinks.items() %}
       <div class="container">
         <div class="row">
           <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">{{drink.type}}</h2>
+            <h2 class="d-block">{{category}}</h2>
           </div>
         </div>
         <div class="row">
 
-            {% for unit in drink.units %}
+            {% for unit in drink %}
               <div class="col-lg-4 mb-5 col-md-6">
                 <div class="wine_v_1 text-center pb-4 pt-5">
-                  <img src="{{unit.picture}}" alt="Image" class="img-fluid">
-                  {% if unit.is_profitable %}
+                  <img src="images\{{unit.picture}}" alt="Image" class="img-fluid">
+                  {% if unit.Акция %}
                     <img src="images/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
                   {% endif %}
                   <div>
-                    <h3 class="heading mt-3 mb-3 text-dark">{{unit.name}}</h3>
+                    <h3 class="heading mt-3 mb-3 text-dark">{{unit.Название}}</h3>
                     <p>
-                      {% if unit.variety %}
-                        Сорт винограда - {{unit.variety}}<br/>
+                      {% if unit.Сорт %}
+                        Сорт винограда - {{unit.Сорт}}<br/>
                       {% endif %}
-                      <span class="price">{{unit.price}} руб.</span>
+                      <span class="price">{{unit.Цена}} руб.</span>
                     </p>
                   </div>
                 </div>
