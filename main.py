@@ -19,19 +19,20 @@ def get_template_file():
 
 
 def get_number_years_winery():
-    age_site = round(datetime.datetime.now().year - 1921)
+    creation_year = 1921
+    exist_years = datetime.datetime.now().year - creation_year
 
-    number_of_years = age_site % 100
+    number_of_years = exist_years % 100
     if number_of_years >= 10 and number_of_years <= 20:
-        return f"{age_site} лет"
+        return f"{exist_years} лет"
     else:
-        number_of_years = age_site % 10
+        number_of_years = exist_years % 10
         if number_of_years == 1:
-            return f"{age_site} год"
+            return f"{exist_years} год"
         elif number_of_years >= 2 and number_of_years <= 4:
-            return f"{age_site} года"
+            return f"{exist_years} года"
         else:
-            return f"{age_site} лет"
+            return f"{exist_years} лет"
 
 
 def main():
