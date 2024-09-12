@@ -1,7 +1,7 @@
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import datetime
-import general_functions
+import get_wine_list
 import argparse
 
 
@@ -35,17 +35,15 @@ def get_number_years_winery():
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Получает путь к файлу таблицы",
-    )
+    parser = argparse.ArgumentParser()
     parser.add_argument(
         "-f",
         "--file",
-        help="Получает путь к файлу таблицы",
+        help="Название файла таблицы",
     )
     args = parser.parse_args()
     file_name = args.file
-    drinks = general_functions.fetch_drinks(file_name)
+    drinks = get_wine_list.fetch_drinks(file_name)
     template = get_template_file()
     rendered_page = template.render(
         years=get_number_years_winery(),
