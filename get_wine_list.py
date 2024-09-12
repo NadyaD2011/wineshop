@@ -1,5 +1,6 @@
-from pandas import pd
+import pandas as pd
 import collections
+from pprint import pprint
 
 
 def read_wine_table(table_name):
@@ -34,7 +35,8 @@ def fetch_drinks(table_name):
 
                 if drink["Акция"]:
                     drink_info["is_profitable"] = is_profitable
-                    drink_units.append(drink_info)
+                    
+                drink_units.append(drink_info)
 
         one_type_drinks = {
             "type": drinks_by_type,
