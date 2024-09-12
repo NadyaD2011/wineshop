@@ -44,7 +44,7 @@ def main():
     )
     args = parser.parse_args()
     file_name = args.file
-    drinks = get_wine_list.fetch_drinks(file_name)
+    drinks = get_wine_list.read_wine_table(file_name)
     template = get_template_file()
     rendered_page = template.render(
         years=get_number_years_winery(),
