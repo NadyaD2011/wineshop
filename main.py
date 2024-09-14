@@ -36,13 +36,17 @@ def get_number_years_winery():
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Название файла таблицы",
+    )
     parser.add_argument(
         "-f",
         "--file",
         help="Название файла таблицы",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(
+        help="Название файла таблицы"
+    )
     file_name = args.file
     drinks = get_wine_list.read_wine_table(file_name)
     template = get_template_file()
